@@ -51,5 +51,5 @@ if __name__ == "__main__":
             print("\n\nPassword was not found.")
     except Exception:
         print("Usage: wp-force.py <target url> \nExample: wp-force.py http://example.com/wp-login.php")
-
+	print()
     
